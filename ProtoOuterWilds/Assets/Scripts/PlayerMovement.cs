@@ -27,7 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform currentPlanet;
 
-    Vector3 gravityDirection;
+    [HideInInspector] public Vector3 gravityDirection;
+
+    public Transform playerRotationGO;
 
     public Transform groundCheck;
     public float groundCheckRadius;
@@ -108,10 +110,10 @@ public class PlayerMovement : MonoBehaviour
 
         //StartCoroutine(IsGroundedUpdateGap(isGrounded));
 
-        rb.AddForce(transform.up * up * jetpackHorizontalForce * Time.fixedDeltaTime, ForceMode.Force);
-        rb.AddForce(-transform.up * down * jetpackHorizontalForce * Time.fixedDeltaTime, ForceMode.Force);
+        rb.AddForce(playerRotationGO.up * up * jetpackHorizontalForce * Time.fixedDeltaTime, ForceMode.Force);
+        rb.AddForce(-playerRotationGO.up * down * jetpackHorizontalForce * Time.fixedDeltaTime, ForceMode.Force);
 
-        direction = (transform.right * x + transform.forward * z).normalized;
+        direction = (playerRotationGO.right * x + playerRotationGO.forward * z).normalized;
 
         if (walk == true)
             rb.velocity = direction * walkSpeed * Time.fixedDeltaTime;

@@ -10,6 +10,8 @@ public class MouseLook : MonoBehaviour
     public float mouseSensitivity;
 
     public Transform pCamera;
+    public Transform playerRotationGO;
+
     float cameraRotation;
     float localRotation;
 
@@ -26,16 +28,24 @@ public class MouseLook : MonoBehaviour
         mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         cameraRotation -= mouseY;
-        cameraRotation = Mathf.Clamp(cameraRotation, -80f, 80f);
-
         localRotation += mouseX;
 
-        pCamera.localRotation = Quaternion.Euler(cameraRotation, 0f, 0f);
+        if (PlayerMovement.pm.currentPlanet != null)
+        {
+            pCamera.localRotation = Quaternion.Euler(cameraRotation, 0f, 0f);
+            playerRotationGO.parent.localRotation = Quaternion.Euler(Vector3.zero);
 
-        float xAngle = Vector2.Angle(Vector3.up, new Vector3(transform.position.x, 0f, 0f) - new Vector3(PlayerMovement.pm.currentPlanet.position.x,0f,0f));
-        float zAngle = Vector2.Angle(Vector3.up, new Vector3(0f, 0f, transform.position.z) - new Vector3(0f, 0f, PlayerMovement.pm.currentPlanet.position.z));
+            cameraRotation = Mathf.Clamp(cameraRotation, -80f, 80f);
+            playerRotationGO.localRotation = Quaternion.Euler(0f, localRotation, 0f);
+        }
+        else
+        {
+            pCamera.localRotation = Quaternion.Euler(Vector3.zero);
+            playerRotationGO.parent.localRotation = Quaternion.Euler(cameraRotation, 0f, 0f);
 
-        transform.localRotation = Quaternion.Euler(0f, localRotation, 0f);
+            playerRotationGO.localRotation = Quaternion.Euler(0f, localRotation, 0f); 
+        }
         
+        //Vector3.RotateTowards()
     }
 }
