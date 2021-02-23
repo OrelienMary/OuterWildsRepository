@@ -4,31 +4,121 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement pm;
+
     float x;
     float z;
+    float up;
+    float down;
+
+    float upIsPressedSince = 0f;
 
     public Rigidbody rb;
 
-    public float speed;
+    Vector3 direction;
+
+    public float walkSpeed;
+    public float jumpForce;
+    public float jetpackHorizontalForce;
+    public float jetpackVerticalForce;
 
     public float gravityValue;
+    public float gravityMultiplier;
+
+    public Transform currentPlanet;
+
+    Vector3 gravityDirection;
+
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask groundMask;
+    bool isGrounded = false;
+    bool walk = false;
+
+    float isGroundedSince = 0;
+
+    bool jumpInput;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        pm = this;
+    }
+
+    private void Update()
+    {
+        if(currentPlanet != null)
+        {
+            gravityDirection = (currentPlanet.position - transform.position).normalized;
+
+            //transform.rotation = Quaternion.
+
+
+            //transform.LookAt(currentPlanet);
+        }
+
+        x = Input.GetAxis("Horizontal");
+        z = Input.GetAxis("Vertical");
+
+        if (Input.GetButton("Shift"))
+        {
+            up = 1;
+            upIsPressedSince += Time.deltaTime;
+        }
+        else
+        {
+            up = 0;
+            upIsPressedSince = 0f;
+        }
+
+        if (Input.GetButton("Control"))
+            down = 1;
+        else
+            down = 0;
+
+        jumpInput = Input.GetButtonDown("Jump");
+
+        if(jumpInput == true && isGrounded == true)
+        {
+            if(upIsPressedSince > 0.2f)
+                rb.AddForce(-gravityDirection * jumpForce * 1.5f, ForceMode.Impulse);
+            else
+                rb.AddForce(-gravityDirection * jumpForce, ForceMode.Impulse);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        x = Input.GetAxis("Horizontal");
-        z = Input.GetAxis("Vertical");
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
 
-        Vector3 direction = (transform.right * x + transform.forward * z).normalized * speed;
+        if(isGrounded == true)
+        {
+            isGroundedSince += Time.fixedDeltaTime;
+        }
+        else
+        {
+            isGroundedSince = 0f;
+        }
 
-        rb.AddForce(direction * speed * Time.fixedDeltaTime,ForceMode.Force);
+        if (isGroundedSince >= 0.2f)
+            walk = true;
+        else
+            walk = false;
 
-        rb.AddForce(-Vector3.up * gravityValue * Time.fixedDeltaTime, ForceMode.Force);
+        //StartCoroutine(IsGroundedUpdateGap(isGrounded));
+
+        rb.AddForce(transform.up * up * jetpackHorizontalForce * Time.fixedDeltaTime, ForceMode.Force);
+        rb.AddForce(-transform.up * down * jetpackHorizontalForce * Time.fixedDeltaTime, ForceMode.Force);
+
+        direction = (transform.right * x + transform.forward * z).normalized;
+
+        if (walk == true)
+            rb.velocity = direction * walkSpeed * Time.fixedDeltaTime;
+        else
+            rb.AddForce(direction * jetpackVerticalForce * Time.fixedDeltaTime,ForceMode.Force);
+        
+        rb.AddForce(gravityDirection * gravityValue * gravityMultiplier * Time.fixedDeltaTime, ForceMode.Acceleration);
+
     }
 }
