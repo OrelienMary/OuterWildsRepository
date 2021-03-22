@@ -41,7 +41,6 @@ public class PlayerMovement : MonoBehaviour
 
     bool jumpInput;
 
-    // Start is called before the first frame update
     private void Awake()
     {
         pm = this;
@@ -54,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
             gravityDirection = (currentPlanet.position - transform.position).normalized;
 
             //transform.rotation = Quaternion.
-
 
             //transform.LookAt(currentPlanet);
         }
@@ -89,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
