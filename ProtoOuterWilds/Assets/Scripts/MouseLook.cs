@@ -23,6 +23,8 @@ public class MouseLook : MonoBehaviour
 
     public float changingDegreeForce;
 
+    public float changeRotationSpeed = 0.01f;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -44,26 +46,29 @@ public class MouseLook : MonoBehaviour
         }
         else if(currentPlanetWasNull == true && PlayerMovement.pm.currentPlanet != null)
         {
+            changing = true;
+
             StartCoroutine(ChangeViewSpaceToPlanet());
         }
 
         if(changing == false)
 
-        if (PlayerMovement.pm.currentPlanet != null)
-        {
-            pCamera.localRotation = Quaternion.Euler(cameraRotation, 0f, 0f);
+            if (PlayerMovement.pm.currentPlanet != null)
+            {
+                pCamera.localRotation = Quaternion.Euler(cameraRotation, 0f, 0f);
 
-            cameraRotation = Mathf.Clamp(cameraRotation, -80f, 80f);
-            playerRotationGO.localRotation = Quaternion.Euler(0f, localRotation, 0f);
-        }
-        else
-        {
-            pCamera.localRotation = Quaternion.Euler(Vector3.zero);
+                cameraRotation = Mathf.Clamp(cameraRotation, -80f, 80f);
+                playerRotationGO.localRotation = Quaternion.Euler(0f, localRotation, 0f);
 
-            playerRotationGO.localRotation = Quaternion.Euler(0f, 0f, 0f); 
-        }
-        
-        if(PlayerMovement.pm.currentPlanet == null)
+            }
+            else
+            {
+                pCamera.localRotation = Quaternion.Euler(Vector3.zero);
+
+                playerRotationGO.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+
+        if (PlayerMovement.pm.currentPlanet == null)
         {
             currentPlanetWasNull = true;
         }
@@ -71,12 +76,12 @@ public class MouseLook : MonoBehaviour
         {
             currentPlanetWasNull = false;
         }
-
-        //Vector3.RotateTowards()
     }
 
     void ChangeViewPlanetToSpace()
     {
+        Debug.Log("Change View Planet To Space");
+
         transform.rotation = Quaternion.LookRotation(pCamera.forward, pCamera.up);
 
         pCamera.rotation = Quaternion.Euler(Vector3.zero);
@@ -87,15 +92,25 @@ public class MouseLook : MonoBehaviour
     {
         changing = true;
 
-        for(float i = 0; i < 0.5f; i += Time.fixedDeltaTime)
-        {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right), -PlayerMovement.pm.gravityDirection), 10f * Time.fixedDeltaTime);
+        Quaternion target = Quaternion.LookRotation(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right), -PlayerMovement.pm.gravityDirection);
 
-            //pCamera.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(cameraRotation, 0f, 0f), 10f * Time.fixedDeltaTime);
-            //playerRotationGO.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(0f, localRotation, 0f), 10f * Time.fixedDeltaTime);
+        while (Quaternion.Angle(transform.rotation, target) > 5f )
+        {
+            target = Quaternion.LookRotation(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right), -PlayerMovement.pm.gravityDirection);
+
+            Debug.Log(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right));
+
+            Debug.DrawRay(transform.position, Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right) * 10f, Color.red, 20f);
+
+            transform.rotation = Quaternion.Slerp(transform.rotation, target, changeRotationSpeed);
 
             yield return new WaitForFixedUpdate();
         }
+
+        cameraRotation = 0;
+        localRotation = 0;
+
+        Debug.Log(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right));
 
         /*playerRotationGO.localRotation = Quaternion.Euler(new Vector3(0f, pCamera.localRotation.eulerAngles.y, 0f));
         pCamera.localRotation = Quaternion.Euler(new Vector3(pCamera.localRotation.eulerAngles.x, 0f, 0f));*/

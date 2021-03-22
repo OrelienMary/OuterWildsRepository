@@ -342,6 +342,7 @@ MonoBehaviour:
   changing: 0
   currentPlanetWasNull: 0
   changingDegreeForce: 1
+  changeRotationSpeed: 0.15
 --- !u!4 &729843597
 Transform:
   m_ObjectHideFlags: 0
@@ -792,6 +793,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8990961757163012663, guid: 0681b9a344c86804c9e57a2f5055847e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0681b9a344c86804c9e57a2f5055847e, type: 3}
