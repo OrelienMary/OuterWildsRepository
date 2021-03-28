@@ -80,8 +80,6 @@ public class MouseLook : MonoBehaviour
 
     void ChangeViewPlanetToSpace()
     {
-        Debug.Log("Change View Planet To Space");
-
         transform.rotation = Quaternion.LookRotation(pCamera.forward, pCamera.up);
 
         pCamera.rotation = Quaternion.Euler(Vector3.zero);
@@ -98,8 +96,6 @@ public class MouseLook : MonoBehaviour
         {
             target = Quaternion.LookRotation(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right), -PlayerMovement.pm.gravityDirection);
 
-            Debug.Log(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right));
-
             Debug.DrawRay(transform.position, Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right) * 10f, Color.red, 20f);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, target, changeRotationSpeed);
@@ -109,8 +105,6 @@ public class MouseLook : MonoBehaviour
 
         cameraRotation = 0;
         localRotation = 0;
-
-        Debug.Log(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right));
 
         /*playerRotationGO.localRotation = Quaternion.Euler(new Vector3(0f, pCamera.localRotation.eulerAngles.y, 0f));
         pCamera.localRotation = Quaternion.Euler(new Vector3(pCamera.localRotation.eulerAngles.x, 0f, 0f));*/
