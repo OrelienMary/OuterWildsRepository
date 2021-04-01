@@ -27,6 +27,11 @@ public class PlanetEditor : Editor
             planet.GeneratePlanet();
         }
 
+        if(GUILayout.Button("SavePrefab"))
+        {
+            planet.SavePrefabAndMeshes();
+        }
+
         DrawSettingsEditor(planet.shapeSettings, planet.OnShapeSettingsUpdated, ref planet.shapeSettingsFoldOut, ref shapeEditor);
         DrawSettingsEditor(planet.colorSettings, planet.OnColorSettingsUpdated, ref planet.colorSettingsFoldOut, ref colorEditor);
     }

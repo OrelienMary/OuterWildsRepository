@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEditor.Presets;
+using System;
+using Object = UnityEngine.Object;
+using UnityEngine.UIElements;
+using UnityEditor.IMGUI;
 
 public class Planet : MonoBehaviour
 {
+    public string path;
+    string prefabPath;
+
     [Range(2,256)]
     public int resolution = 10;
     public bool autoUpdate = true;
@@ -18,15 +27,22 @@ public class Planet : MonoBehaviour
     [HideInInspector]
     public bool colorSettingsFoldOut;
 
-    ShapeGenerator shapeGenerator;
+    ShapeGenerator shapeGenerator = new ShapeGenerator();
+    ColorGenerator colorGenerator = new ColorGenerator();
 
     [SerializeField, HideInInspector]
     MeshFilter[] meshFilters;
     TerrainFace[] terrainFaces;
 
+    private void Start()
+    {
+        //GeneratePlanet();
+    }
+
     void Initialize()
     {
-        shapeGenerator = new ShapeGenerator(shapeSettings);
+        shapeGenerator.UpdateSettings(shapeSettings);
+        colorGenerator.UpdateSettings(colorSettings);
 
         if(meshFilters == null || meshFilters.Length == 0)
         {
@@ -93,13 +109,45 @@ public class Planet : MonoBehaviour
                 terrainFaces[i].ConstructMesh();
             }
         }
+
+        colorGenerator.UpdateElevation(shapeGenerator.elevationMinMax);
     }
 
     void GenerateColors()
     {
-        foreach(MeshFilter filter in meshFilters)
-        {
-            filter.GetComponent<MeshRenderer>().sharedMaterial.color = colorSettings.planetColor;
-        }
+        colorGenerator.UpdateColors();
     }
+
+    public void SavePrefabAndMeshes()
+    {
+        //Enregistrement Meshes
+        for(int i = 0; i < 6; i++)
+        {
+            SaveMesh(terrainFaces[i].mesh, transform.gameObject.name + "Mesh_" + (i + 1), path);
+        }
+
+        Material mat = new Material(colorSettings.planetMaterial);
+        mat.name = transform.gameObject.name + "Material";
+
+        AssetDatabase.CreateAsset(mat, path);
+
+        //Enregistrement Prefab
+        prefabPath = path;
+
+        prefabPath = prefabPath + "/" + transform.gameObject.name + ".prefab";
+        prefabPath = AssetDatabase.GenerateUniqueAssetPath(prefabPath);
+
+        //PrefabUtility.UnpackPrefabInstance(transform.gameObject, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+        PrefabUtility.SaveAsPrefabAssetAndConnect(transform.gameObject, prefabPath, InteractionMode.UserAction);
+        AssetDatabase.SaveAssets();
+    }
+
+    void SaveMesh(Mesh mesh, string name, string path)
+    {
+        path = path + "/" + name + ".asset";
+
+        AssetDatabase.CreateAsset(mesh, path);
+        AssetDatabase.SaveAssets();
+    }
+
 }
