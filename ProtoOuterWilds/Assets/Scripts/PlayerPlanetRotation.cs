@@ -10,8 +10,6 @@ public class PlayerPlanetRotation : MonoBehaviour
             if (PlayerMovement.pm.currentPlanet != null)
             {
                 transform.rotation = Quaternion.LookRotation(Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right), -PlayerMovement.pm.gravityDirection);
-
-                Debug.DrawRay(transform.position, Vector3.Cross(PlayerMovement.pm.gravityDirection, transform.right) * 10f, Color.green, 20f);
             }  
             else
             {

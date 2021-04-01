@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &2800000
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WeirdBiomePlanetTexture
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 50
+  m_Height: 1
+  m_CompleteImageSize: 388
+  m_TextureFormat: 4
+  m_MipCount: 6
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 388
+  _typelessdata: 18009aff432a7dff6d5460ff927c48ff8e934fff89aa57ff84c25eff7fd966ff7af06dff7cf973ff8ae976ff97d978ffa5c97affb3b97dffc1a97fffcf9982ffdd8884ffeb7887fff96889fff7668dffe96f92ffdb7797ffcd809bffbf89a0ffb192a5ffa39aaaff94a3afff86acb3ff78b5b8ff6abdbdff5cc6c2ff4ecfc7ff40d8ccff32e0d0ff24e9d5ff16f2daff07fbdfff06fbdfff06fcdfff05fce0ff05fce0ff04fde0ff04fde0ff03fde0ff03fde1ff02fee1ff02fee1ff01fee1ff01ffe1ff00ffe1ff2d158bff7f6854ff8b9e53ff81cd62ff7bf470ff90e177ffacc17bffc8a180ffe48085fff8678bffe27394ffc6849dffaa96a7ff8da7b1ff71b9baff55cac4ff39dcceff1dedd7ff06fbdfff05fcdfff04fce0ff03fde0ff02fde1ff01fee1ff00ffe1ff59416dff84bb5cff89e674ffc2a77efff56a8affc7839cff8ba7b1ff51ccc5ff18efd8ff04fcdfff02fde0ff00fee1ff6e7e64ffa5c679ffde7693ff6eb9bbff0ef5dbff01fde0ff89a26effa697a7ff07f9ddffa697a7ff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 

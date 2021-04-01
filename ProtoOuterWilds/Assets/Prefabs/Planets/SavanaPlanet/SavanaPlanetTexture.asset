@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &2800000
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SavanaPlanetTexture
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 50
+  m_Height: 1
+  m_CompleteImageSize: 388
+  m_TextureFormat: 4
+  m_MipCount: 6
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 388
+  _typelessdata: 4fa854ff669850ff7e884bff947a47ff9b8049ffa2874bffa98d4cffb0934effb79a50ffbda051ffc4a653ffcbad55ffd2b356ffd9b958ffe0bf5affe7c65cffeecc5dfff5d25ffffcd961fff9dd62ffede064ffe2e365ffd6e666ffcae968ffbfec69ffb3ef6bffa8f26cff9cf56eff91f86fff85fb70ff7afe72ff7cff78ff83ff7fff8bff87ff92ff8eff99ff96ffa0ff9dffa8ffa5ffafffacffb6ffb4ffbeffbbffc5ffc3ffccffcaffd3ffd2ffdbffd9ffe2ffe1ffe9ffe8fff0fff0fff8fff7ffffffffff5aa052ff898149ff9e834affac904dffba9d50ffc7a954ffd5b657ffe3c25bfff1cf5efffadb61ffe7e164ffd0e767ffb9ed6affa2f36dff8bf96fff7bfe75ff87ff83ff95ff92ffa4ffa1ffb2ffb0ffc1ffbfffcfffceffdeffddffecffecfffbfffbff738f4dffa68b4bffc3a552ffe0bf5afff8d960ffd0e666ffa1f36dff7cfe76ff98ff95ffb6ffb4ffd4ffd3fff2fff2ff8c8d4cffd1b256ffe4df63ff8ef871ffa7ffa4ffe3ffe2ffae9f51ffb9eb6affc5ffc3ffb9eb6aff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 

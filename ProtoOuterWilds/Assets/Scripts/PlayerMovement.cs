@@ -6,10 +6,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public static PlayerMovement pm;
 
-    float x;
-    float z;
-    float up;
-    float down;
+    [HideInInspector] public float x;
+    [HideInInspector] public float z;
+    [HideInInspector] public float up;
+    [HideInInspector] public float down;
 
     float upIsPressedSince = 0f;
 
@@ -44,6 +44,11 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         pm = this;
+    }
+
+    void Start()
+    {
+        Cursor.visible = false;
     }
 
     private void Update()

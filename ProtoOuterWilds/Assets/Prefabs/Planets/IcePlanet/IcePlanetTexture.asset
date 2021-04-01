@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &2800000
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IcePlanetTexture
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 50
+  m_Height: 1
+  m_CompleteImageSize: 388
+  m_TextureFormat: 4
+  m_MipCount: 6
+  m_IsReadable: 1
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 388
+  _typelessdata: 04faffffaf7e36ff929230ff75a52bff58b926ff3bcd21ff1ee11bff26e32aff32e53aff3de64aff48e85aff53e96aff5eeb7aff69ec8aff74ee9aff7fefaaff8af1baff96f2caffa1f4daffacf5eaffb7f7faffbcf7ffffbef8ffffc1f8ffffc3f8ffffc6f8ffffc8f9ffffcaf9ffffcdf9ffffcff9ffffd2faffffd4faffffd6faffffd9fbffffdbfbffffdefbffffe0fbffffe2fcffffe5fcffffe7fcffffe9fdffffecfdffffeefdfffff1fdfffff3fefffff5fefffff8fefffffafefffffdffffffffffffff59bc9aff839b2dff49c323ff22e222ff37e542ff4de862ff63eb82ff79eea2ff90f1c2ffa6f4e2ffb9f7fcffbff8ffffc4f8ffffc9f9ffffcef9ffffd3faffffd7faffffdcfbffffe1fbffffe6fcffffeafdffffeffdfffff4fefffff9fefffffeffffff6faa5fff30d622ff46e758ff74ed9bffa3f3ddffbef7feffc9f9ffffd3faffffddfbffffe7fcfffff0fdfffffbfeffff4fc040ff5dea79ffb0f5edffcef9ffffe2fbfffff5fdffff56d55cffbff7f6ffebfcffffbff7f6ff
+  m_StreamData:
+    offset: 0
+    size: 0
+    path: 

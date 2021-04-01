@@ -1,12 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.Presets;
-using System;
-using Object = UnityEngine.Object;
-using UnityEngine.UIElements;
-using UnityEditor.IMGUI;
+#endif
 
 public class Planet : MonoBehaviour
 {
@@ -64,6 +59,10 @@ public class Planet : MonoBehaviour
                 meshObj.AddComponent<MeshRenderer>();
                 meshFilters[i] = meshObj.AddComponent<MeshFilter>();
                 meshFilters[i].sharedMesh = new Mesh();
+
+                meshObj.AddComponent<MeshCollider>();
+
+                meshObj.layer = LayerMask.NameToLayer("Ground");
             }
             meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial;
 
@@ -120,16 +119,27 @@ public class Planet : MonoBehaviour
 
     public void SavePrefabAndMeshes()
     {
-        //Enregistrement Meshes
-        for(int i = 0; i < 6; i++)
-        {
-            SaveMesh(terrainFaces[i].mesh, transform.gameObject.name + "Mesh_" + (i + 1), path);
-        }
+#if UNITY_EDITOR
+        string originalPath = path;
+
+        AssetDatabase.CreateFolder(path, transform.gameObject.name);
+
+        path = path + "/" + transform.gameObject.name;
+
+        AssetDatabase.CreateAsset(colorGenerator.texture, path + "/" + transform.gameObject.name + "Texture" + ".asset");
 
         Material mat = new Material(colorSettings.planetMaterial);
-        mat.name = transform.gameObject.name + "Material";
 
-        AssetDatabase.CreateAsset(mat, path);
+        mat.SetTexture("_planetTexture", colorGenerator.texture);
+
+        AssetDatabase.CreateAsset(mat, path + "/" + transform.gameObject.name + "Material" + ".mat");
+
+        //Enregistrement Meshes
+        for (int i = 0; i < 6; i++)
+        {
+            meshFilters[i].GetComponent<MeshRenderer>().sharedMaterial = mat;
+            SaveMesh(terrainFaces[i].mesh, transform.gameObject.name + "Mesh_" + (i + 1), path);
+        }        
 
         //Enregistrement Prefab
         prefabPath = path;
@@ -137,17 +147,26 @@ public class Planet : MonoBehaviour
         prefabPath = prefabPath + "/" + transform.gameObject.name + ".prefab";
         prefabPath = AssetDatabase.GenerateUniqueAssetPath(prefabPath);
 
-        //PrefabUtility.UnpackPrefabInstance(transform.gameObject, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+        if(PrefabUtility.IsPartOfRegularPrefab(gameObject))
+            PrefabUtility.UnpackPrefabInstance(transform.gameObject, PrefabUnpackMode.Completely, InteractionMode.UserAction);
+
         PrefabUtility.SaveAsPrefabAssetAndConnect(transform.gameObject, prefabPath, InteractionMode.UserAction);
         AssetDatabase.SaveAssets();
+
+        path = originalPath;
+
+        DestroyImmediate(this);
+#endif
     }
 
     void SaveMesh(Mesh mesh, string name, string path)
     {
+#if UNITY_EDITOR
         path = path + "/" + name + ".asset";
 
         AssetDatabase.CreateAsset(mesh, path);
         AssetDatabase.SaveAssets();
+#endif
     }
 
 }
